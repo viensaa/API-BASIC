@@ -1,4 +1,5 @@
-﻿using SampleWebAPI.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using SampleWebAPI.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,17 @@ namespace SampleWebAPI.Data.DAL
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Samurai>> GetAll()
+        public async Task<IEnumerable<Samurai>> GetAll()
         {
-            throw new NotImplementedException();
+            var results = await _context.Samurais.OrderBy(s => s.Name).ToListAsync();
+            return results;
         }
 
-        public Task<Samurai> GetById(int id)
+        public async Task<Samurai> GetById(int id)
         {
-            throw new NotImplementedException();
+            var results = await _context.Samurais.FirstOrDefaultAsync(s => s.id == id);
+            if (results == null) throw new Exception($"data tidak di temukan");
+            return results;
         }
 
         public Task<IEnumerable<Samurai>> GetByName(string name)
