@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//DAY 4
 namespace SampleWebAPI.Data.DAL
 {
     public class SamuraiDAL : ISamurai
@@ -54,9 +54,26 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
-        public Task<Samurai> Update(Samurai obj)
+        //untuk update data
+        public async Task<Samurai> Update(Samurai obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = await _context.Samurais.FirstOrDefaultAsync(s => s.id == obj.id);
+                if (data == null)
+                    throw new Exception($"Data Tidak Di temukan");
+
+                data.Name = obj.Name;
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"{ex.Message}");
+            }
         }
+
+
     }
 }

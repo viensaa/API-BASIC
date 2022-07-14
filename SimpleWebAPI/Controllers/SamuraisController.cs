@@ -37,21 +37,36 @@ namespace SimpleWebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Samurai> Get(int id)
+        public async Task<SamuraiReadDTO> Get(int id)
         {
+            SamuraiReadDTO samuraiDTO = new SamuraiReadDTO();
             var result = await _samuraiDAL.GetById(id);
             if (result == null) throw new Exception("Data tidak di temukan");
-            return result;
+
+            samuraiDTO.Id = result.id;
+            samuraiDTO.Name = result.Name;
+            return samuraiDTO;
         }
+       
 
         //menginsert data
         [HttpPost]
-        public async Task<ActionResult> Post(Samurai samurai)
+        public async Task<ActionResult> Post(SamuraiCreateDTO samuraiCreateDTO)
         {
             try
             {
-                var result = await _samuraiDAL.Insert(samurai);
-                return CreatedAtAction("Get", new { id = result.id }, result);
+                var newSamurai = new Samurai
+                {
+                    Name = samuraiCreateDTO.Name
+                };
+                var result = await _samuraiDAL.Insert(newSamurai);
+                var samuraiReadDto = new SamuraiReadDTO
+                {
+                    Id = result.id,
+                    Name = result.Name
+                };
+                return CreatedAtAction("Get", new {id = result.id}, samuraiReadDto);
+
             }
             catch (Exception ex)
             {
@@ -59,6 +74,8 @@ namespace SimpleWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //
 
 
     }
