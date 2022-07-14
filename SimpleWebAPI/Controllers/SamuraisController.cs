@@ -49,7 +49,7 @@ namespace SimpleWebAPI.Controllers
         }
        
 
-        //menginsert data
+        //menginsert data (pake post)
         [HttpPost]
         public async Task<ActionResult> Post(SamuraiCreateDTO samuraiCreateDTO)
         {
@@ -75,7 +75,26 @@ namespace SimpleWebAPI.Controllers
             }
         }
 
-        //
+        //update data pake pu
+        [HttpPut]
+        public async Task<ActionResult>Put(SamuraiReadDTO samuraiDTO)
+        {
+            try
+            {
+                var UpdateSamurai = new Samurai
+                {
+                    id = samuraiDTO.Id,
+                    Name = samuraiDTO.Name
+                };
+                var result = await _samuraiDAL.Update(UpdateSamurai);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
 
 
     }
