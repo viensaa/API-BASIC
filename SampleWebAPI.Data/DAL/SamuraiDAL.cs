@@ -49,9 +49,12 @@ namespace SampleWebAPI.Data.DAL
             return results;
         }
 
-        public Task<IEnumerable<Samurai>> GetByName(string name)
+        public async Task<IEnumerable<Samurai>> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var results = await _context.Samurais.Where(s=>s.Name.Contains(name)).ToListAsync();
+            if (results == null) throw new Exception($"Data Tidak Di Temukan");
+
+            return results;
         }
 
         //insert data

@@ -36,20 +36,48 @@ namespace SimpleWebAPI.Controllers
             return samuraiDTO;
         }
 
-        //mengambil data (pake GET)
-        [HttpGet("{id}")]
-        public async Task<SamuraiReadDTO> Get(int id)
+        //getbyname(buat sendiri)
+        [HttpGet("{name}")]
+        public async Task<IEnumerable<SamuraiReadDTO>>Get(string name)
         {
-            SamuraiReadDTO samuraiDTO = new SamuraiReadDTO();
-            var result = await _samuraiDAL.GetById(id);
-            if (result == null) throw new Exception("Data tidak di temukan");
-
-            samuraiDTO.Id = result.id;
-            samuraiDTO.Name = result.Name;
-            return samuraiDTO;
+            List<SamuraiReadDTO> ReadData = new List<SamuraiReadDTO>();
+            var results = await _samuraiDAL.GetByName(name);
+            if (results == null)
+            {
+                throw new Exception("Data tidak di temukan");
+            }
+            else
+            {
+                foreach(var result in results)
+                {
+                    ReadData.Add(new SamuraiReadDTO
+                    {
+                        Id = result.id,
+                        Name = result.Name
+                    });
+                }
+                return ReadData;
+            }
+          
         }
-       
+
+        //mengambil data (pake GET)
+        //[HttpGet("{id}")]
+        //public async Task<SamuraiReadDTO> Get(int id)
+        //{
+        //    SamuraiReadDTO samuraiDTO = new SamuraiReadDTO();
+        //    var result = await _samuraiDAL.GetById(id);
+        //    if (result == null) throw new Exception("Data tidak di temukan");
+
+        //    samuraiDTO.Id = result.id;
+        //    samuraiDTO.Name = result.Name;
+        //    return samuraiDTO;
+        //}
+
+
+
         //menginsert data (pake post)
+
         [HttpPost]
         public async Task<ActionResult> Post(SamuraiCreateDTO samuraiCreateDTO)
         {
