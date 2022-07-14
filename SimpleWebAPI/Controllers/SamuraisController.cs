@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
+using SimpleWebAPI.DTO;
 using SimpleWebAPI.Models;
 
 namespace SimpleWebAPI.Controllers
@@ -18,12 +19,23 @@ namespace SimpleWebAPI.Controllers
             _samuraiDAL = samuraiDAL;
         }
 
+        //DAY 4
         [HttpGet]
-      public async Task<IEnumerable<Samurai>> Get()
+      public async Task<IEnumerable<SamuraiReadDTO>> Get()
         {
+            List<SamuraiReadDTO> samuraiDTO = new List<SamuraiReadDTO>();
             var results = await _samuraiDAL.GetAll();
-            return results;
+            foreach(var result in results)
+            {
+                samuraiDTO.Add(new SamuraiReadDTO
+                {
+                    Id = result.id,
+                    Name = result.Name
+                });
+            }
+            return samuraiDTO;
         }
+
         [HttpGet("{id}")]
         public async Task<Samurai> Get(int id)
         {
@@ -31,6 +43,23 @@ namespace SimpleWebAPI.Controllers
             if (result == null) throw new Exception("Data tidak di temukan");
             return result;
         }
+
+        //menginsert data
+        [HttpPost]
+        public async Task<ActionResult> Post(Samurai samurai)
+        {
+            try
+            {
+                var result = await _samuraiDAL.Insert(samurai);
+                return CreatedAtAction("Get", new { id = result.id }, result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
 
     }
 }
