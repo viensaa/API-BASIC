@@ -9,6 +9,12 @@ namespace SampleWebAPI.Data.DAL
 {
     public class SamuraiDAL : ISamurai
     {
+        private readonly SamuraiContext _context;
+        public SamuraiDAL(SamuraiContext context)
+        {
+            _context = context;
+        }
+
         public Task DeleteById(int id)
         {
             throw new NotImplementedException();
