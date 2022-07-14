@@ -35,6 +35,7 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
+        //fungsi ambil data
         public async Task<IEnumerable<Samurai>> GetAll()
         {
             var results = await _context.Samurais.OrderBy(s => s.Name).ToListAsync();
@@ -53,6 +54,7 @@ namespace SampleWebAPI.Data.DAL
             throw new NotImplementedException();
         }
 
+        //insert data
         public async Task<Samurai> Insert(Samurai obj)
         {
             try
