@@ -36,6 +36,7 @@ namespace SimpleWebAPI.Controllers
             return samuraiDTO;
         }
 
+        //mengambil data (pake GET)
         [HttpGet("{id}")]
         public async Task<SamuraiReadDTO> Get(int id)
         {
@@ -48,7 +49,6 @@ namespace SimpleWebAPI.Controllers
             return samuraiDTO;
         }
        
-
         //menginsert data (pake post)
         [HttpPost]
         public async Task<ActionResult> Post(SamuraiCreateDTO samuraiCreateDTO)
@@ -75,7 +75,7 @@ namespace SimpleWebAPI.Controllers
             }
         }
 
-        //update data pake pu
+        //update data (pake put)
         [HttpPut]
         public async Task<ActionResult>Put(SamuraiReadDTO samuraiDTO)
         {
@@ -88,6 +88,22 @@ namespace SimpleWebAPI.Controllers
                 };
                 var result = await _samuraiDAL.Update(UpdateSamurai);
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //delete data
+        [HttpDelete("{id}")]
+        public async Task<ActionResult>Delete(int id)
+        {
+            try
+            {
+                await _samuraiDAL.DeleteById(id);
+                return Ok("data berhasil di delete");
             }
             catch (Exception ex)
             {

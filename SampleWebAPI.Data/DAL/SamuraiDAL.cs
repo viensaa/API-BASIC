@@ -16,9 +16,23 @@ namespace SampleWebAPI.Data.DAL
             _context = context;
         }
 
-        public Task DeleteById(int id)
+        //mennguanakn fungsi remove
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var deleteSamurai = await _context.Samurais.FirstOrDefaultAsync(s => s.id == id);
+                if (deleteSamurai == null)
+                    throw new Exception($"data samurai tidak di temukan");
+
+                _context.Samurais.Remove(deleteSamurai);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"{ex.Message}");
+            }
         }
 
         public async Task<IEnumerable<Samurai>> GetAll()
