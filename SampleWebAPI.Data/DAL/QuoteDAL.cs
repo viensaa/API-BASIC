@@ -24,7 +24,7 @@ namespace SampleWebAPI.Data.DAL
 
         public async Task<IEnumerable<Quote>> GetAll()
         {
-            var results = await _context.Quotes.OrderBy(q => q.Text).ToListAsync();
+            var results = await _context.Quotes.OrderBy(q => q.text).ToListAsync();
             return results;
         }
 

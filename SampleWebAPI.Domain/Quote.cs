@@ -8,8 +8,8 @@ namespace SampleWebAPI.Domain
 {
     public class Quote
     {
-        public int Id { get; set; }
-        public string Text { get; set; }
+        public int id { get; set; }
+        public string text { get; set; }
         //relasi 1 to many
         public Samurai Samurai { get; set; }
         public int SamuraiId { get; set; }

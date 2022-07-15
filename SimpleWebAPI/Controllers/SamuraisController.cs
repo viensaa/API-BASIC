@@ -45,7 +45,7 @@ namespace SimpleWebAPI.Controllers
         }
 
         [HttpGet("SamuraiWithQuote")]
-       public async Task<IEnumerable<SamuraiQuoteDTO>> GwtSamuraiWitQuote()
+       public async Task<IEnumerable<SamuraiQuoteDTO>> GetSamuraiQuote()
         {                        
             //menggunakan automapper
             var results = await _samuraiDAL.SamuraiWIthQuote();

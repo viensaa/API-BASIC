@@ -29,8 +29,8 @@ namespace SampleWebAPI.Controllers
             {
                 quoteDtos.Add(new QuoteDTO
                 {
-                    id = result.Id,
-                    text = result.Text
+                    id = result.id,
+                    text = result.text
                 });
             }
             return quoteDtos;
