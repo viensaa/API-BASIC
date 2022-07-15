@@ -37,7 +37,7 @@ namespace SimpleWebAPI.Controllers
         }
 
         //getbyname(buat sendiri)
-        [HttpGet("{name}")]
+        [HttpGet("GetByName/{name}")]
         public async Task<IEnumerable<SamuraiReadDTO>>Get(string name)
         {
             List<SamuraiReadDTO> ReadData = new List<SamuraiReadDTO>();
@@ -62,17 +62,17 @@ namespace SimpleWebAPI.Controllers
         }
 
         //mengambil data (pake GET)
-        //[HttpGet("{id}")]
-        //public async Task<SamuraiReadDTO> Get(int id)
-        //{
-        //    SamuraiReadDTO samuraiDTO = new SamuraiReadDTO();
-        //    var result = await _samuraiDAL.GetById(id);
-        //    if (result == null) throw new Exception("Data tidak di temukan");
+        [HttpGet("GetById{id}")]
+        public async Task<SamuraiReadDTO> Get(int id)
+        {
+            SamuraiReadDTO samuraiDTO = new SamuraiReadDTO();
+            var result = await _samuraiDAL.GetById(id);
+            if (result == null) throw new Exception("Data tidak di temukan");
 
-        //    samuraiDTO.Id = result.id;
-        //    samuraiDTO.Name = result.Name;
-        //    return samuraiDTO;
-        //}
+            samuraiDTO.Id = result.id;
+            samuraiDTO.Name = result.Name;
+            return samuraiDTO;
+        }
 
 
 
@@ -140,6 +140,8 @@ namespace SimpleWebAPI.Controllers
             }
         }
 
+
+        //DAY5
 
     }
 }
