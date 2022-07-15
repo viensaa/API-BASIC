@@ -62,7 +62,7 @@ namespace SimpleWebAPI.Controllers
         }
 
         //mengambil data (pake GET)
-        [HttpGet("GetById{id}")]
+        [HttpGet("GetById/{id}")]
         public async Task<SamuraiReadDTO> Get(int id)
         {
             SamuraiReadDTO samuraiDTO = new SamuraiReadDTO();
