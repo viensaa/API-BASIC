@@ -19,6 +19,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SamuraiContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("SamuraiConnection")).EnableSensitiveDataLogging());
 
+//menambahkan configurasi auto mapper 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //inject class DAL emnggunakan addscoped(inertaface, class nya)
 builder.Services.AddScoped<ISamurai, SamuraiDAL>();

@@ -29,7 +29,7 @@ namespace SimpleWebAPI.Controllers
             {
                 samuraiDTO.Add(new SamuraiReadDTO
                 {
-                    Id = result.id,
+                    id = result.id,
                     Name = result.Name
                 });
             }
@@ -75,7 +75,7 @@ namespace SimpleWebAPI.Controllers
                 {
                     ReadData.Add(new SamuraiReadDTO
                     {
-                        Id = result.id,
+                        id = result.id,
                         Name = result.Name
                     });
                 }
@@ -92,7 +92,7 @@ namespace SimpleWebAPI.Controllers
             var result = await _samuraiDAL.GetById(id);
             if (result == null) throw new Exception("Data tidak di temukan");
 
-            samuraiDTO.Id = result.id;
+            samuraiDTO.id = result.id;
             samuraiDTO.Name = result.Name;
             return samuraiDTO;
         }
@@ -113,7 +113,7 @@ namespace SimpleWebAPI.Controllers
                 var result = await _samuraiDAL.Insert(newSamurai);
                 var samuraiReadDto = new SamuraiReadDTO
                 {
-                    Id = result.id,
+                    id = result.id,
                     Name = result.Name
                 };
                 return CreatedAtAction("Get", new {id = result.id}, samuraiReadDto);
@@ -134,7 +134,7 @@ namespace SimpleWebAPI.Controllers
             {
                 var UpdateSamurai = new Samurai
                 {
-                    id = samuraiDTO.Id,
+                    id = samuraiDTO.id,
                     Name = samuraiDTO.Name
                 };
                 var result = await _samuraiDAL.Update(UpdateSamurai);
