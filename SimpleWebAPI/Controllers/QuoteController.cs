@@ -19,7 +19,7 @@ namespace SampleWebAPI.Controllers
             _quoteDal = quoteDal;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<IEnumerable<QuoteDTO>> Get()
         {

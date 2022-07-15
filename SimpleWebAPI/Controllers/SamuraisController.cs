@@ -50,13 +50,14 @@ namespace SimpleWebAPI.Controllers
             //menggunakan automapper
             var results = await _samuraiDAL.SamuraiWIthQuote();
             var samuraiquoteDTO = _mapper.Map<IEnumerable<SamuraiQuoteDTO>>(results);
-            
+
             //manual
             //List<SamuraiQuoteDTO> samuraiquoteDTO = new List<SamuraiQuoteDTO>();
             //foreach (var result in results)
             //{
             //    List<QuoteDTO> quotesDTO = new List<QuoteDTO>();
-            //    foreach (var quote in result.Quotes) {
+            //    foreach (var quote in result.Quotes)
+            //    {
             //        quotesDTO.Add(new QuoteDTO
             //        {
             //            text = quote.Text
@@ -67,7 +68,7 @@ namespace SimpleWebAPI.Controllers
             //        Name = result.Name,
             //        Quotes = quotesDTO
             //    });
-            return samuraiquoteDTO;                    
+                return samuraiquoteDTO;                    
         }
 
         //getbyname(buat sendiri)
