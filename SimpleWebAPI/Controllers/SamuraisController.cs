@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
@@ -11,28 +12,35 @@ namespace SimpleWebAPI.Controllers
     [ApiController]
     public class SamuraisController : ControllerBase
     {
-        //private List<Student> students;
+        //generate auto mapper dan samurai dal
         private readonly ISamurai _samuraiDAL;
-        
-        public SamuraisController(ISamurai samuraiDAL)
+        private readonly IMapper _mapper;
+
+        public SamuraisController(ISamurai samuraiDAL,IMapper mapper )
         {
             _samuraiDAL = samuraiDAL;
+            _mapper = mapper;
         }
 
         //DAY 4
         [HttpGet]
       public async Task<IEnumerable<SamuraiReadDTO>> Get()
-        {
-            List<SamuraiReadDTO> samuraiDTO = new List<SamuraiReadDTO>();
+        {                    
             var results = await _samuraiDAL.GetAll();
-            foreach(var result in results)
-            {
-                samuraiDTO.Add(new SamuraiReadDTO
-                {
-                    id = result.id,
-                    Name = result.Name
-                });
-            }
+          
+            //menggunakan mapper
+            var samuraiDTO = _mapper.Map<IEnumerable<SamuraiReadDTO>>(results);
+
+            //tanpa mapper
+            // List<SamuraiReadDTO> samuraiDTO = new List<SamuraiReadDTO>();
+            //foreach(var result in results)
+            //{
+            //    samuraiDTO.Add(new SamuraiReadDTO
+            //    {
+            //        id = result.id,
+            //        Name = result.Name
+            //    });
+            //}
             return samuraiDTO;
         }
 
