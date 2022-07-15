@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using SampleWebAPI.Data;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
+using SampleWebAPI.Services;
 using SimpleWebAPI.DTO;
+using SimpleWebAPI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,10 +26,13 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //inject class DAL emnggunakan addscoped(inertaface, class nya)
 builder.Services.AddScoped<ISamurai, SamuraiDAL>();
-
-//inject class DAL
 builder.Services.AddScoped<IQuote, QuoteDAL>();
 
+// configure strongly typed settings object
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+// configure DI for application services
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
@@ -38,9 +43,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+//app.UseHttpsRedirection();
+//app.UseAuthorization();
 
 app.MapControllers();
 

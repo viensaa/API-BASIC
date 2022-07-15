@@ -46,25 +46,28 @@ namespace SimpleWebAPI.Controllers
 
         [HttpGet("SamuraiWithQuote")]
        public async Task<IEnumerable<SamuraiQuoteDTO>> GwtSamuraiWitQuote()
-        {
-            List<SamuraiQuoteDTO> samuraiquoteDTO = new List<SamuraiQuoteDTO>();
+        {                        
+            //menggunakan automapper
             var results = await _samuraiDAL.SamuraiWIthQuote();
-            foreach (var result in results)
-            {
-                List<QuoteDTO> quotesDTO = new List<QuoteDTO>();
-                foreach (var quote in result.Quotes) {
-                    quotesDTO.Add(new QuoteDTO
-                    {
-                        text = quote.Text
-                    });
-                }
-                samuraiquoteDTO.Add(new SamuraiQuoteDTO
-                {
-                    Name = result.Name,
-                    Quotes = quotesDTO
-                });
-            }
-            return samuraiquoteDTO;
+            var samuraiquoteDTO = _mapper.Map<IEnumerable<SamuraiQuoteDTO>>(results);
+            
+            //manual
+            //List<SamuraiQuoteDTO> samuraiquoteDTO = new List<SamuraiQuoteDTO>();
+            //foreach (var result in results)
+            //{
+            //    List<QuoteDTO> quotesDTO = new List<QuoteDTO>();
+            //    foreach (var quote in result.Quotes) {
+            //        quotesDTO.Add(new QuoteDTO
+            //        {
+            //            text = quote.Text
+            //        });
+            //    }
+            //    samuraiquoteDTO.Add(new SamuraiQuoteDTO
+            //    {
+            //        Name = result.Name,
+            //        Quotes = quotesDTO
+            //    });
+            return samuraiquoteDTO;                    
         }
 
         //getbyname(buat sendiri)
