@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 //DAY 4
 namespace SampleWebAPI.Data.DAL
 {
@@ -41,6 +42,8 @@ namespace SampleWebAPI.Data.DAL
             var results = await _context.Samurais.OrderBy(s => s.Name).ToListAsync();
             return results;
         }
+
+       
 
         public async Task<Samurai> GetById(int id)
         {
@@ -93,6 +96,10 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
-
+        public async Task<IEnumerable<Samurai>> SamuraiWIthQuote()
+        {
+            var results = await _context.Samurais.Include(q => q.Quotes).ToListAsync();
+            return results;
+        }
     }
 }
