@@ -26,7 +26,7 @@ namespace SampleWebAPI.Data.DAL
         {
             var results = await _context.Quotes.OrderBy(q => q.text).ToListAsync();
             return results;
-            var data
+            
         }
 
         public Task<Quote> GetById(int id)
