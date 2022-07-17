@@ -24,8 +24,8 @@ namespace SampleWebAPI.Data.DAL
         public async Task<IEnumerable<Element>> GetAll()
         {
             var results = await _context.element.OrderBy(e => e.ElementName).ToListAsync();
-            return results;
-            var data
+            return results;sd
+            var datadasda
         }
 
         public Task<Element> GetById(int id)
