@@ -25,6 +25,7 @@ namespace SampleWebAPI.Data.DAL
         {
             var results = await _context.element.OrderBy(e => e.ElementName).ToListAsync();
             return results;
+            var data
         }
 
         public Task<Element> GetById(int id)
