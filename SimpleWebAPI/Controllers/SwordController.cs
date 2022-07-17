@@ -53,17 +53,25 @@ namespace SimpleWebAPI.Controllers
 
         //insert
         [HttpPost("insert")]
-        public async Task<ActionResult> Post(SwordCreateDTO swordcreatedto)
+        public async Task<ActionResult> Post(SwordCreateDTO swordCreateDTO)
         {
             try
-            {                
-                var NewSword = _mapper.Map<Sword>(swordcreatedto);
+            {
+                 var NewSword = _mapper.Map<Sword>(swordCreateDTO);
+                //var NewSword = new Sword
+                //{
+                //    SwordName = swordCreateDTO.SwordName,
+                //    Weight = swordCreateDTO.Weight
+
+                //};
                 var result = await _swordDAL.Insert(NewSword);
-                return Ok("Data bershasil di tambahkan");
+                var DataRead = _mapper.Map<SwordDTO>(result);
+
+                return CreatedAtAction("Get", new { id = result.Id }, DataRead);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 

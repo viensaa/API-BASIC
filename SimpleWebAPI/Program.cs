@@ -28,6 +28,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ISamurai, SamuraiDAL>();
 builder.Services.AddScoped<IQuote, QuoteDAL>();
 builder.Services.AddScoped<ISword, SwordDAL>();
+builder.Services.AddScoped<IElement, ElementDAL>();
+
 
 // configure strongly typed settings object
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
