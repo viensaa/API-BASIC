@@ -26,12 +26,21 @@ namespace SimpleWebAPI.Controllers
             var data = _mapper.Map<IEnumerable<ElementDTO>>(results);
             return data;
         }
+
         [HttpGet("GetByName/{name}")]
         public async Task<IEnumerable<ElementDTO>> Get(string name)
         {
             var results = await _elementDAL.GetByName(name);
             var data = _mapper.Map<IEnumerable<ElementDTO>>(results);
             return data;
+        }
+        [HttpGet("GetById/{id}")]
+        public async Task<ElementDTO>Get(int id)
+        {
+            var result = await _elementDAL.GetById(id);
+            var data = _mapper.Map<ElementDTO>(result);
+            return data;
+
         }
     }
 }

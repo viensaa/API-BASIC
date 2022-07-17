@@ -28,9 +28,12 @@ namespace SampleWebAPI.Data.DAL
             
         }
 
-        public Task<Element> GetById(int id)
+        public async Task<Element> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.element.FirstOrDefaultAsync(e => e.Id == id);
+            if (result == null) throw new Exception($"Data Tidak Di Temukan");
+
+            return result;
         }
 
         public async Task<IEnumerable<Element>> GetByName(string name)
