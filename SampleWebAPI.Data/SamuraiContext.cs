@@ -20,11 +20,12 @@ namespace SampleWebAPI.Data
         {
 
         }
+        //samakan dengan nama tabel di database 
         public DbSet<Samurai> Samurais { get; set; }
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Battle> Battles { get; set; }
         public DbSet<Sword> Sword { get; set; }
-        public DbSet<Element> elements { get; set; }
+        public DbSet<Element> element { get; set; }
         public DbSet<SamuraiBattleStats> SamuraiBattleStats { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

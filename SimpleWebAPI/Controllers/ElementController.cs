@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
+using SimpleWebAPI.DTO;
 
 namespace SimpleWebAPI.Controllers
 {
@@ -16,6 +17,14 @@ namespace SimpleWebAPI.Controllers
         {
             _elementDAL = ElementDAL;
             _mapper = mapper;
+        }
+        [HttpGet]
+        public async Task<IEnumerable<ElementDTO>> Get()
+        {
+            var results = await _elementDAL.GetAll();
+
+            var data = _mapper.Map<IEnumerable<ElementDTO>>(results);
+            return data;
         }
     }
 }

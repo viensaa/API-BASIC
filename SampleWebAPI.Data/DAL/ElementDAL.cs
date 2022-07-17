@@ -23,7 +23,7 @@ namespace SampleWebAPI.Data.DAL
 
         public async Task<IEnumerable<Element>> GetAll()
         {
-            var results = await _context.elements.OrderBy(e => e.ElementName).ToListAsync();
+            var results = await _context.element.OrderBy(e => e.ElementName).ToListAsync();
             return results;
         }
 
