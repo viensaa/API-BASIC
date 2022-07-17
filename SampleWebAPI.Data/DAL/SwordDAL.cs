@@ -16,9 +16,23 @@ namespace SampleWebAPI.Data.DAL
         {
             _context = context;
         }
-        public Task DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var DeleteSword = await _context.Sword.FirstOrDefaultAsync(s => s.Id == id);
+                if (DeleteSword == null)
+                    throw new Exception($"Data dengan ID {id} tidak di temukan");
+
+                _context.Sword.Remove(DeleteSword);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Sword>> GetAll()
@@ -27,22 +41,29 @@ namespace SampleWebAPI.Data.DAL
             return result;
         }
 
-        public Task<Sword> GetById(int id)
+        public async Task<IEnumerable<Sword>> GetByName(string name)
         {
-            throw new NotImplementedException();
+           var results = await _context.Sword.Where(s => s.SwordName.Contains(name)).ToListAsync();
+            if(results ==null) throw new Exception($"Data Tidak Di Temukan");
+
+            return results;
         }
 
-        public Task<IEnumerable<Sword>> GetByName(string name)
+        public async Task<Sword> GetById(int id)
         {
-            throw new NotImplementedException();
+            var results = await _context.Sword.FirstOrDefaultAsync(s => s.Id == id);
+            if (results == null) throw new Exception($"Data Tidak Di Temukan");
+
+            return results;
         }
 
+        //masih salah
         public async Task<Sword> Insert(Sword obj)
         {
             try
             {
                 _context.Sword.Add(obj);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return obj;
             }
             catch (Exception ex)
@@ -52,9 +73,24 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
-        public Task<Sword> Update(Sword obj)
+        public async Task<Sword> Update(Sword obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var data = await _context.Sword.FirstOrDefaultAsync(s => s.Id == obj.Id);
+                if (data == null)
+                    throw new Exception($"Data Tidak Di temukan");
+
+                data.Weight = obj.Weight;
+                data.SwordName = obj.SwordName;
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

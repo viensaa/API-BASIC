@@ -30,31 +30,51 @@ namespace SimpleWebAPI.Controllers
             return data;
         }
 
+        //GetdatabyName
+        [HttpGet("GetByName/{name}")]
+        public async Task<IEnumerable<SwordDTO>>Get(string name)
+        {
+            var results = await _swordDAL.GetByName(name);
+
+            var data = _mapper.Map<IEnumerable<SwordDTO>>(results);
+            return data;
+        }
+
+        //GetByid
+        [HttpGet("GetById/{id}")]
+        public async Task<SwordDTO>Get(int id)
+        {
+            var result = await _swordDAL.GetById(id);
+            //if (result == null) throw new Exception("Data tidak di temukan");
+
+            var data = _mapper.Map<SwordDTO>(result);
+            return data;
+        }
+
         //insert
-        [HttpPost]
+        [HttpPost("insert")]
         public async Task<ActionResult> Post(SwordCreateDTO swordcreatedto)
         {
             try
-            {
-                //tanpa mapper
-                //var newSword = new Sword
-                //{
-                //    SwordName = swordcreatedto.SwordName,
-                //};
-                //var result = await _swordDAL.Insert(newSword);
-                //var ReadDto = new SwordDTO
-                //{
-                //    Id = result.Id,
-                //    SwordName = result.SwordName
-                //};
-                //return CreatedAtAction("Get", new { id = result.Id }, ReadDto);
-                //menggunakan mapper
+            {                
                 var NewSword = _mapper.Map<Sword>(swordcreatedto);
                 var result = await _swordDAL.Insert(NewSword);
-                var Read = _mapper.Map<SwordDTO>(result);
+                return Ok("Data bershasil di tambahkan");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
-                return CreatedAtAction("Get", new { id = result.Id }, Read);
-
+        //Delete
+        [HttpDelete("Delete/{id}")]
+        public async Task<ActionResult>Delete(int id)
+        {
+            try
+            {
+                await _swordDAL.DeleteById(id);
+                return Ok("data berhasil di hapus");
             }
             catch (Exception ex)
             {
@@ -62,6 +82,26 @@ namespace SimpleWebAPI.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        //Update
+        [HttpPut("Update")]
+        public async Task<ActionResult>Put(SwordDTO swordDTO)
+        {
+            try
+            {
+                var UpdateSword = _mapper.Map<Sword>(swordDTO);
+                var result = await _swordDAL.Update(UpdateSword);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        
+        
 
     }
 }
