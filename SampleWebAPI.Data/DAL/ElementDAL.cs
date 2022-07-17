@@ -33,9 +33,12 @@ namespace SampleWebAPI.Data.DAL
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Element>> GetByName(string name)
+        public async Task<IEnumerable<Element>> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var results = await _context.element.Where(s => s.ElementName.Contains(name)).ToListAsync();
+            if (results == null) throw new Exception($"Data Tidak Di Temukan");
+
+            return results;
         }
 
         public Task<Element> Insert(Element obj)
