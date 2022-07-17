@@ -264,7 +264,7 @@ void AddQuote()
 {
     var newQuote = new Quote
     {
-        Text = "Pedang Tidak Akan Memakan Tuannya",
+        text = "Pedang Tidak Akan Memakan Tuannya",
         SamuraiId = 6
     };
     _context.Quotes.Add(newQuote);
@@ -276,7 +276,7 @@ void GetQuote()
     var quotes = _context.Quotes.ToList();
     foreach (var quote in quotes)
     {
-        Console.WriteLine($"Samurai id : {quote.SamuraiId} - Quotes: {quote.Text}");
+        Console.WriteLine($"Samurai id : {quote.SamuraiId} - Quotes: {quote.text}");
     }
 }
 
@@ -286,7 +286,7 @@ void GetQuoteBySamuraiId(int id)
     var Quotes = _context.Quotes.Where(s => s.SamuraiId == id).ToList();
     foreach(var Quote in Quotes)
     {
-        Console.WriteLine($" Quotes :{Quote.Text} By {Quote.Samurai.Name} ");
+        Console.WriteLine($" Quotes :{Quote.text} By {Quote.Samurai.Name} ");
     }
     
 }
@@ -298,8 +298,8 @@ void AddSamuraiWithQuote()
         Name = "Masashi Kishimoto",
         Quotes = new List<Quote>
         {
-            new Quote{Text="gomo gomo no mi is scamm"},
-            new Quote{Text="never scam people"},
+            new Quote{text="gomo gomo no mi is scamm"},
+            new Quote{text="never scam people"},
         }
     };
     _context.Samurais.Add(data);
@@ -311,7 +311,7 @@ void AddQuoteToExistingSamurai(int id,string quote)
     var samurai = _context.Samurais.Find(id);
     if(samurai != null)
     {
-        samurai.Quotes.Add(new Quote { Text=quote});
+        samurai.Quotes.Add(new Quote { text=quote});
         _context.SaveChanges();
     }
     else
@@ -322,10 +322,10 @@ void AddQuoteToExistingSamurai(int id,string quote)
 
 void GetQuoteWithSamurai()
 {
-    var quotes = _context.Quotes.Include(q => q.Samurai).OrderBy(q=>q.Text).ToList();
+    var quotes = _context.Quotes.Include(q => q.Samurai).OrderBy(q=>q.text).ToList();
     foreach(var quote in quotes)
     {
-        Console.WriteLine($" Quotes :{quote.Text} By {quote.Samurai.Name} ");
+        Console.WriteLine($" Quotes :{quote.text} By {quote.Samurai.Name} ");
     }
 }
 
@@ -337,7 +337,7 @@ void GetSamuraiWithQuote()
         Console.WriteLine($"{samurai.Name}");
         foreach( var quote in samurai.Quotes)
         {
-            Console.WriteLine($"==========>{quote.Text}");
+            Console.WriteLine($"==========>{quote.text}");
         }
     }
 }
