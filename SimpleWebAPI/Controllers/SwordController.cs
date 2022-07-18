@@ -57,10 +57,10 @@ namespace SimpleWebAPI.Controllers
         {
             try
             {
-                var NewSword = _mapper.Map<Sword>(swordCreateDTO);                
-                var result = await _swordDAL.Insert(NewSword);
-                var DataRead = _mapper.Map<SwordDTO>(result);
-                return CreatedAtAction("Get", new { id = result.Id }, DataRead);
+                var newSword = _mapper.Map<Sword>(swordCreateDTO);
+                var result = await _swordDAL.Insert(newSword);
+                var Read = _mapper.Map<SwordDTO>(result);
+                return CreatedAtAction("Get", new { id = result.Id }, Read);
             }
             catch (Exception ex)
             {
