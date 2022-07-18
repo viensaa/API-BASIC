@@ -73,9 +73,23 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
-        public Task<Element> Update(Element obj)
+        public async Task<Element> Update(Element obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var UpdateData = await _context.element.FirstOrDefaultAsync(e => e.Id == obj.Id);
+                if (UpdateData == null)
+                    throw new Exception($"Data Dengan id={obj.Id} tidak di temukan");
+
+                UpdateData.ElementName = obj.ElementName;
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

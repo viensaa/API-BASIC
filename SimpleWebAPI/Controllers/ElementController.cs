@@ -75,5 +75,22 @@ namespace SimpleWebAPI.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpPut("Update")]
+
+        public async Task<ActionResult>Put(ElementDTO elementDTO)
+        {
+            try
+            {
+                var UpdateSword = _mapper.Map<Element>(elementDTO);
+                var result = await _elementDAL.Update(UpdateSword);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
