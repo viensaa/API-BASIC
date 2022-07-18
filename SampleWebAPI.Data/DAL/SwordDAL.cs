@@ -62,9 +62,9 @@ namespace SampleWebAPI.Data.DAL
         {
             try
             {
-                _context.Sword.Add(obj);
+               _context.Sword.Add(obj);
                await _context.SaveChangesAsync();
-                return obj;
+               return obj;
             }
             catch (Exception ex)
             {

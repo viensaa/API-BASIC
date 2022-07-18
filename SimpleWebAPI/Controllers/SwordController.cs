@@ -57,16 +57,9 @@ namespace SimpleWebAPI.Controllers
         {
             try
             {
-                 var NewSword = _mapper.Map<Sword>(swordCreateDTO);
-                //var NewSword = new Sword
-                //{
-                //    SwordName = swordCreateDTO.SwordName,
-                //    Weight = swordCreateDTO.Weight
-
-                //};
+                var NewSword = _mapper.Map<Sword>(swordCreateDTO);                
                 var result = await _swordDAL.Insert(NewSword);
                 var DataRead = _mapper.Map<SwordDTO>(result);
-
                 return CreatedAtAction("Get", new { id = result.Id }, DataRead);
             }
             catch (Exception ex)

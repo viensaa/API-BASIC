@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
+using SampleWebAPI.Domain;
 using SimpleWebAPI.DTO;
 
 namespace SimpleWebAPI.Controllers
@@ -41,6 +42,23 @@ namespace SimpleWebAPI.Controllers
             var data = _mapper.Map<ElementDTO>(result);
             return data;
 
+        }
+
+        [HttpPost("insert")]
+        public async Task<ActionResult>Post(ElementCreateDTO elementCreateDTO)
+        {
+            try
+            {
+                var newElement = _mapper.Map<Element>(elementCreateDTO);
+                var result = await _elementDAL.Insert(newElement);
+                var Read = _mapper.Map<ElementDTO>(result);
+                return CreatedAtAction("Get", new { id = result.Id }, Read);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

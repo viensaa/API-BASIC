@@ -10,6 +10,7 @@ namespace SimpleWebAPI.Profiles
         {
             CreateMap<Element, ElementDTO>();
             CreateMap<ElementDTO, Element>();
+            CreateMap<ElementCreateDTO, Element>();
         }
     }
 }

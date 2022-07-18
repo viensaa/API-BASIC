@@ -44,9 +44,19 @@ namespace SampleWebAPI.Data.DAL
             return results;
         }
 
-        public Task<Element> Insert(Element obj)
+        public async Task<Element> Insert(Element obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.element.Add(obj);
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"{ex.Message}");
+            }
         }
 
         public Task<Element> Update(Element obj)
