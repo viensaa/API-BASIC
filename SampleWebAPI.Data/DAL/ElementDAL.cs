@@ -16,9 +16,23 @@ namespace SampleWebAPI.Data.DAL
         {
             _context = context;
         }
-        public Task DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var DeleteElement = await _context.element.FirstOrDefaultAsync(e => e.Id == id);
+                if (DeleteElement == null)
+                    throw new Exception($"Data dengan id == {id} tidak di temukan");
+
+                _context.element.Remove(DeleteElement);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Element>> GetAll()

@@ -60,5 +60,20 @@ namespace SimpleWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete("Delete")]
+        public async Task<ActionResult>Delete(int id)
+        {
+            try
+            {
+                await _elementDAL.DeleteById(id);
+                return Ok("Data Berhasil di Hapus");
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
