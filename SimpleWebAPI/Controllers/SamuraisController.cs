@@ -81,6 +81,7 @@ namespace SimpleWebAPI.Controllers
        // }
 
         //getbyname(buat sendiri)
+
         [HttpGet("GetByName/{name}")]
         public async Task<IEnumerable<SamuraiReadDTO>>Get(string name)
         {
@@ -127,16 +128,22 @@ namespace SimpleWebAPI.Controllers
         {
             try
             {
-                var newSamurai = new Samurai
-                {
-                    Name = samuraiCreateDTO.Name
-                };
+                //using mapper
+                var newSamurai = _mapper.Map<Samurai>(samuraiCreateDTO);
                 var result = await _samuraiDAL.Insert(newSamurai);
-                var samuraiReadDto = new SamuraiReadDTO
-                {
-                    id = result.id,
-                    Name = result.Name
-                };
+                var samuraiReadDto = _mapper.Map<SamuraiReadDTO>(result);
+               // return CreatedAtAction("Get", new { id = result.id }, samuraiReadDto);
+                //manual
+                //var newSamurai = new Samurai
+                //{
+                //    Name = samuraiCreateDTO.Name
+                //};
+                //var result = await _samuraiDAL.Insert(newSamurai);
+                //var samuraiReadDto = new SamuraiReadDTO
+                //{
+                //    id = result.id,
+                //    Name = result.Name
+                //};
                 return CreatedAtAction("Get", new {id = result.id}, samuraiReadDto);
 
             }
@@ -145,6 +152,14 @@ namespace SimpleWebAPI.Controllers
 
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpPost("addsamuraiWithSword")]
+        public async Task<ActionResult>Post(SamuraiSwordCreateDTO samuraiwithsworddto)
+        {
+            var newData = _mapper.Map<Samurai>(samuraiwithsworddto);
+            var result = await _samuraiDAL.Insert(newData);
+            var read = _mapper.Map<SamuraiWithSwordDTO>(result);
+            return CreatedAtAction("Get", new { id = result.id }, read);
         }
 
         //update data (pake put)

@@ -98,5 +98,10 @@ namespace SampleWebAPI.Data.DAL
             var results = await _context.Sword.Include(s => s.Samurai).Include(e => e.Element).Include(t=> t.Type).ToListAsync();
             return results;
         }
+
+        public Task<Sword> AddSamuraiWithSword(Sword obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

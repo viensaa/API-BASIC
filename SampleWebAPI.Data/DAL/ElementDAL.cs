@@ -16,6 +16,12 @@ namespace SampleWebAPI.Data.DAL
         {
             _context = context;
         }
+
+        public Task<Element> AddSamuraiWithSword(Element obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task DeleteById(int id)
         {
             try

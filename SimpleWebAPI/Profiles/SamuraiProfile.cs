@@ -13,6 +13,7 @@ namespace SimpleWebAPI.Profiles
             CreateMap<Samurai, SamuraiReadDTO>();
             CreateMap<SamuraiReadDTO, Samurai>();
             CreateMap<SamuraiCreateDTO, Samurai>();
+            CreateMap<SamuraiSwordCreateDTO, Samurai>();
             //CreateMap<Samurai, SwordDTO>();
 
             CreateMap<Samurai, SamuraiQuoteDTO>();
