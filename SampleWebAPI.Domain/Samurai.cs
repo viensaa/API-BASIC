@@ -15,7 +15,7 @@ namespace SampleWebAPI.Domain
         public List<Quote> Quotes { get; set; } = new List<Quote>();
         public List<Battle> Battles { get; set; } = new List<Battle>();
 
-        public List<Sword> Swords { get; set; } = new List<Sword>();
+        public List<Sword> Sword { get; set; } = new List<Sword>();
 
         //relasi 1 to 1
         public Horse Horse { get; set; }

@@ -11,6 +11,6 @@ namespace SampleWebAPI.Domain
         public int Id { get; set; }
         public string ElementName { get; set; }
 
-        public List<Sword> swords { get; set; } = new List<Sword>();
+        public List<Sword> sword { get; set; } = new List<Sword>();
     }
 }

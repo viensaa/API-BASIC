@@ -71,6 +71,15 @@ namespace SimpleWebAPI.Controllers
                 return samuraiquoteDTO;                    
         }
 
+        //samruaiwith sword 
+        //[HttpGet("SamuraiWithSword")]
+        //public async Task<IEnumerable<SamuraiWithSwordDTO>> GetSamuraiWithSword()
+        //{
+        //    var results = await _samuraiDAL.SamuraiWithSword();
+        //    var DataRead = _mapper.Map<IEnumerable<SamuraiWithSwordDTO>>(results);
+        //    return DataRead;
+       // }
+
         //getbyname(buat sendiri)
         [HttpGet("GetByName/{name}")]
         public async Task<IEnumerable<SamuraiReadDTO>>Get(string name)

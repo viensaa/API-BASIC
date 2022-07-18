@@ -13,7 +13,7 @@ namespace SampleWebAPI.Domain
         public int Weight { get; set; }
         public Samurai Samurai { get; set; }
         public int SamuraiId { get; set; }
-        public List<Element> Elements { get; set; } = new List<Element>();
+        public List<Element> Element { get; set; } = new List<Element>();
         public int ElementiId { get; set; }
         public Type Type { get; set; }
     }

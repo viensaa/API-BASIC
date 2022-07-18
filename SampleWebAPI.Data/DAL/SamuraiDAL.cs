@@ -101,5 +101,14 @@ namespace SampleWebAPI.Data.DAL
             var results = await _context.Samurais.Include(q => q.Quotes).ToListAsync();
             return results;
         }
+
+        //samuraiwithsword
+        //public async Task<IEnumerable<Samurai>> SamuraiWithSword()
+        //{
+        //    var results = await _context.Samurais.Include(sw => sw.Sword).ToListAsync();
+        //    return results;
+        //}
+
+        
     }
 }

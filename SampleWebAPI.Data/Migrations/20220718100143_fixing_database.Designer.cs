@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SampleWebAPI.Data;
 
@@ -11,9 +12,10 @@ using SampleWebAPI.Data;
 namespace SampleWebAPI.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20220718100143_fixing_database")]
+    partial class fixing_database
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,12 +29,12 @@ namespace SampleWebAPI.Data.Migrations
                     b.Property<int>("ElementId")
                         .HasColumnType("int");
 
-                    b.Property<int>("swordId")
+                    b.Property<int>("swordsId")
                         .HasColumnType("int");
 
-                    b.HasKey("ElementId", "swordId");
+                    b.HasKey("ElementId", "swordsId");
 
-                    b.HasIndex("swordId");
+                    b.HasIndex("swordsId");
 
                     b.ToTable("ElementSword");
                 });
@@ -230,7 +232,7 @@ namespace SampleWebAPI.Data.Migrations
 
                     b.HasOne("SampleWebAPI.Domain.Sword", null)
                         .WithMany()
-                        .HasForeignKey("swordId")
+                        .HasForeignKey("swordsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
