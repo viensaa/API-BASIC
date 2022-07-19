@@ -119,10 +119,7 @@ namespace SimpleWebAPI.Controllers
             return samuraiDTO;
         }
 
-
-
         //menginsert data (pake post)
-
         [HttpPost]
         public async Task<ActionResult> Post(SamuraiCreateDTO samuraiCreateDTO)
         {
@@ -153,6 +150,8 @@ namespace SimpleWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //menambahkan samurai dengna sworad
         [HttpPost("addsamuraiWithSword")]
         public async Task<ActionResult>Post(SamuraiSwordCreateDTO samuraiwithsworddto)
         {

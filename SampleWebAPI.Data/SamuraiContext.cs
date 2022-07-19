@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using Type = SampleWebAPI.Domain.Type;
 
 namespace SampleWebAPI.Data
 {
@@ -26,6 +25,7 @@ namespace SampleWebAPI.Data
         public DbSet<Battle> Battles { get; set; }
         public DbSet<Sword> Sword { get; set; }
         public DbSet<Element> element { get; set; }
+        public DbSet<Type> Type { get; set; }
         public DbSet<SamuraiBattleStats> SamuraiBattleStats { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

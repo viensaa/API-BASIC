@@ -17,7 +17,22 @@ namespace SampleWebAPI.Data.DAL
             _context = context;
         }
 
+        public Task<Element> AddExistingElementToSword(Element obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Element> AddExistingSwordToElement(Element obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Element> AddSamuraiWithSword(Element obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Element> AddSwordWithType(Element obj)
         {
             throw new NotImplementedException();
         }

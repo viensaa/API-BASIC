@@ -119,7 +119,22 @@ namespace SampleWebAPI.Data.DAL
             return results;
         }
 
-        
+        public Task<Samurai> AddSwordWithType(Samurai obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Samurai> AddExistingSwordToElement(Samurai obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Samurai> AddExistingElementToSword(Samurai obj)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
 
 

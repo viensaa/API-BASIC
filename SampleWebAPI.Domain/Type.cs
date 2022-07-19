@@ -11,7 +11,5 @@ namespace SampleWebAPI.Domain
         public int Id { get; set; }
         public string TypeSword { get; set; }
         public int SwordId { get; set; }
-
-
     }
 }
