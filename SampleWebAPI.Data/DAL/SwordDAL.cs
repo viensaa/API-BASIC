@@ -35,6 +35,27 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
+        public async Task<IEnumerable<Sword>> DeleteElementOnSword(int id)
+        {
+            //try
+            //{
+            //    var DeleteElement = await _context.Sword.Include(e=>e.Element.Where(s=> s.Id==id)).FirstOrDefaultAsync(e=> e.Id==id);
+            //    if (DeleteElement == null)
+            //        throw new Exception($"Data dengan ID {id} tidak di temukan");
+
+            //    _context.Sword.RemoveRange(DeleteElement);
+            //    await _context.SaveChangesAsync();
+
+
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    throw new Exception(ex.Message);
+            //}
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Sword>> GetAll()
         {
             var result = await _context.Sword.OrderBy(s => s.Weight).ToListAsync();
@@ -115,11 +136,18 @@ namespace SampleWebAPI.Data.DAL
             throw new NotImplementedException();
         }
 
-        
 
-        public Task<Sword> AddExistingSwordToElement(Sword obj)
+        //Susah bener tapi masuih cacat
+        public async Task<Sword> AddExistingSwordToElement(Sword obj)
         {
-            throw new NotImplementedException();
+            var newSword = _context.Sword.Find(obj.Id);
+            var Element = _context.Element.Find(obj.ElementId);
+
+
+            Element.sword.Add(newSword);
+            await _context.SaveChangesAsync();
+            return obj;
+            //  throw new NotImplementedException();
         }
 
         public Task<Sword> AddExistingElementToSword(Sword obj)
@@ -132,5 +160,7 @@ namespace SampleWebAPI.Data.DAL
             var results = await _context.Sword.Include(s => s.Samurai).Include(e => e.Element).Include(t => t.Type).ToListAsync();
             return results;
         }
+
+        
     }
 }

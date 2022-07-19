@@ -45,5 +45,15 @@ namespace SimpleWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //menambahkan sword dan type sekaligus
+        [HttpPost("SwordAndType")]
+        public async Task<ActionResult> Post(SwordWithTypeDTO swordWithTypeDTO)
+        {
+            var newData = _mapper.Map<Type>(swordWithTypeDTO);
+            var result = await _typeDAL.AddSwordWithType(newData);
+            var Read = _mapper.Map<TypeDTO>(result);
+            return CreatedAtAction("Get", new { id = result.Id }, Read);
+        }
     }
 }

@@ -31,9 +31,20 @@ namespace SampleWebAPI.Data.DAL
             throw new NotImplementedException();
         }
 
-        public Task<Domain.Type> AddSwordWithType(Domain.Type obj)
+        //salah
+        public async Task<Domain.Type> AddSwordWithType(Domain.Type obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Type.Add(obj);
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public Task DeleteById(int id)

@@ -113,7 +113,7 @@ namespace SimpleWebAPI.Controllers
 
 
         //menambahakn Sword beserta dengan Type(masih salah)
-        [HttpPost("addSwordWithType")]
+        [HttpPost("addSwordWithType(MasihSalah)")]
         public async Task<ActionResult> Post(SwordWithTypeDTO swordWithTypeDTO)
         {
             var newData = _mapper.Map<Sword>(swordWithTypeDTO);
@@ -122,6 +122,14 @@ namespace SimpleWebAPI.Controllers
             return CreatedAtAction("Get", new { id = result.Id }, Read);
         }
 
+        [HttpPost("addSwordToExistingElement")]
+        public async Task<ActionResult>Post(AddSwordToExistingElementDTO swordtoelement)
+        {
+            var insertData = _mapper.Map<Sword>(swordtoelement);
+            var result = await _swordDAL.AddExistingSwordToElement(insertData);
+            var Read = _mapper.Map<SwordSamuraiElementDTO>(result);
+            return CreatedAtAction("Get", new { id = result.Id }, Read);
+        }
 
 
 

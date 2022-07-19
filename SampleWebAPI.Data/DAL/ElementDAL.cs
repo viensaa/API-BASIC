@@ -41,11 +41,11 @@ namespace SampleWebAPI.Data.DAL
         {
             try
             {
-                var DeleteElement = await _context.element.FirstOrDefaultAsync(e => e.Id == id);
+                var DeleteElement = await _context.Element.FirstOrDefaultAsync(e => e.Id == id);
                 if (DeleteElement == null)
                     throw new Exception($"Data dengan id == {id} tidak di temukan");
 
-                _context.element.Remove(DeleteElement);
+                _context.Element.Remove(DeleteElement);
                 await _context.SaveChangesAsync();
 
             }
@@ -58,14 +58,14 @@ namespace SampleWebAPI.Data.DAL
 
         public async Task<IEnumerable<Element>> GetAll()
         {
-            var results = await _context.element.OrderBy(e => e.ElementName).ToListAsync();
+            var results = await _context.Element.OrderBy(e => e.ElementName).ToListAsync();
             return results;
             
         }
 
         public async Task<Element> GetById(int id)
         {
-            var result = await _context.element.FirstOrDefaultAsync(e => e.Id == id);
+            var result = await _context.Element.FirstOrDefaultAsync(e => e.Id == id);
             if (result == null) throw new Exception($"Data Tidak Di Temukan");
 
             return result;
@@ -73,7 +73,7 @@ namespace SampleWebAPI.Data.DAL
 
         public async Task<IEnumerable<Element>> GetByName(string name)
         {
-            var results = await _context.element.Where(s => s.ElementName.Contains(name)).ToListAsync();
+            var results = await _context.Element.Where(s => s.ElementName.Contains(name)).ToListAsync();
             if (results == null) throw new Exception($"Data Tidak Di Temukan");
 
             return results;
@@ -83,7 +83,7 @@ namespace SampleWebAPI.Data.DAL
         {
             try
             {
-                _context.element.Add(obj);
+                _context.Element.Add(obj);
                 await _context.SaveChangesAsync();
                 return obj;
             }
@@ -98,7 +98,7 @@ namespace SampleWebAPI.Data.DAL
         {
             try
             {
-                var UpdateData = await _context.element.FirstOrDefaultAsync(e => e.Id == obj.Id);
+                var UpdateData = await _context.Element.FirstOrDefaultAsync(e => e.Id == obj.Id);
                 if (UpdateData == null)
                     throw new Exception($"Data Dengan id={obj.Id} tidak di temukan");
 
