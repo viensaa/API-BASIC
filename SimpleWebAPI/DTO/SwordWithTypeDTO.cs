@@ -2,9 +2,10 @@
 namespace SimpleWebAPI.DTO
 {
     public class SwordWithTypeDTO
-    {        
-        public TypeCreateDTO TypeSword { get; set; }
-        public SwordCreateDTO SwordName { get; set; }
+    {
+        public int Id { get; set; }
+        public string SwordName { get; set; }
+        public Type Type { get; set; }
 
     }
 }

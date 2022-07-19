@@ -161,6 +161,12 @@ namespace SampleWebAPI.Data.DAL
             return results;
         }
 
-        
+        public async Task<IEnumerable<Sword>> GetSwordWithType()
+        {
+            var results = await _context.Sword.Include(t => t.Type).ToListAsync();
+            var pagging = results.Skip(0).Take(10);
+            return pagging;
+            //throw new NotImplementedException();
+        }
     }
 }
