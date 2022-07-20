@@ -5,7 +5,8 @@ namespace SimpleWebAPI.DTO
     {
         public int Id { get; set; }
         public string SwordName { get; set; }
-        public Type Type { get; set; }
+        public int SamuraiId { get; set; }
+        public TypeDTO Type { get; set; }
 
     }
 }
