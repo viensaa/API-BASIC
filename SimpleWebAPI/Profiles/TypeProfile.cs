@@ -14,6 +14,8 @@ namespace SimpleWebAPI.Profiles
             CreateMap<TypeCreateDTO, Type>();
             CreateMap<SwordWithTypeDTO, TypeCreateDTO>();
             CreateMap<SwordWithTypeDTO, SwordCreateDTO>();
+
+           
         }
     }
 }
