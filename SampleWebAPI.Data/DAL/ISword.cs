@@ -14,7 +14,8 @@ namespace SampleWebAPI.Data.DAL
             Task<IEnumerable<Sword>> GetByName(string name);
         Task<IEnumerable<Sword>> GetSwordWithType();
         Task<IEnumerable<Sword>> SamuraiSwordWithElement();
-        Task<IEnumerable<Sword>> DeleteElementOnSword(int id);
+        //Task<IEnumerable<Sword>> DeleteElementOnSword(int id);
+        Task DeleteElementOnSword(int id);
 
 
     }

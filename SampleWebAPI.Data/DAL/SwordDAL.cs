@@ -35,26 +35,7 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
-        public async Task<IEnumerable<Sword>> DeleteElementOnSword(int id)
-        {
-            //try
-            //{
-            //    var DeleteElement = await _context.Sword.Include(e=>e.Element.Where(s=> s.Id==id)).FirstOrDefaultAsync(e=> e.Id==id);
-            //    if (DeleteElement == null)
-            //        throw new Exception($"Data dengan ID {id} tidak di temukan");
-
-            //    _context.Sword.RemoveRange(DeleteElement);
-            //    await _context.SaveChangesAsync();
-
-
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    throw new Exception(ex.Message);
-            //}
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<IEnumerable<Sword>> GetAll()
         {
@@ -167,6 +148,17 @@ namespace SampleWebAPI.Data.DAL
             var pagging = results.Skip(0).Take(10);
             return pagging;
             //throw new NotImplementedException();
+        }
+
+        public async Task DeleteElementOnSword(int id)
+        {
+            var Sword = await _context.Sword.Include(e => e.Element).FirstOrDefaultAsync(s => s.Id == id);
+            if (Sword == null)
+                throw new Exception($"Data Sword dengan ID {id} tidak di temukan");
+
+            var DeleteElement = Sword.Element[0];
+            Sword.Element.Remove(DeleteElement);
+            await _context.SaveChangesAsync();
         }
     }
 }

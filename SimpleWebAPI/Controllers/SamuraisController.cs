@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
+using SampleWebAPI.Helpers;
 using SimpleWebAPI.DTO;
 using SimpleWebAPI.Models;
 
 namespace SimpleWebAPI.Controllers
 {
+    //menambahkan autorize di tangkat method
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SamuraisController : ControllerBase

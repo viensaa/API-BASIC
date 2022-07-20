@@ -84,6 +84,21 @@ namespace SimpleWebAPI.Controllers
             }
         }
 
+        [HttpDelete("DeleteElementOnSword/{id}")]
+        public async Task<ActionResult>DeleteElement(int id)
+        {
+            try
+            {
+                await _swordDAL.DeleteElementOnSword(id);
+                return Ok("Data Berhasil di Hapus");
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
         //Update
         [HttpPut("Update")]
         public async Task<ActionResult>Put(SwordDTO swordDTO)
