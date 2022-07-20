@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SampleWebAPI.Data;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
+using SampleWebAPI.Helpers;
 using SampleWebAPI.Services;
 using SimpleWebAPI.DTO;
 using SimpleWebAPI.Helpers;
@@ -53,6 +54,7 @@ app.UseCors(x => x
         .AllowAnyHeader());
 //app.UseHttpsRedirection();
 //app.UseAuthorization();
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 

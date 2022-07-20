@@ -2,7 +2,7 @@
 
 namespace SampleWebAPI.Models
 {
-    public class AuthenticateRequest
+    public class AuthenticateRequest                 
     {
         [Required]
         public string Username { get; set; }
