@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
+using SampleWebAPI.Helpers;
 using SimpleWebAPI.DTO;
 
 namespace SimpleWebAPI.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ElementController : ControllerBase
@@ -91,6 +93,16 @@ namespace SimpleWebAPI.Controllers
 
                 throw new Exception(ex.Message);
             }
+        }
+
+        //elementwithsword
+        [HttpPost("addElementToExistingSword")]
+        public async Task<ActionResult> Post(int idElement, int idSword)
+        {
+            //var insertData = _mapper.Map<Element>(swordtoelement);
+            await _elementDAL.addElementToSword(idElement,idSword);
+            return Ok("Data Berhasil di Tambahkan");
+
         }
     }
 }

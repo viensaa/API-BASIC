@@ -112,5 +112,14 @@ namespace SampleWebAPI.Data.DAL
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task addElementToSword(int idElement, int idSword)
+        {
+            var Element = _context.Element.FirstOrDefault(e => e.Id == idElement);
+            var sword = _context.Sword.FirstOrDefault(s => s.Id == idSword);
+
+            sword.Element.Add(Element);
+            await _context.SaveChangesAsync();
+        }
     }
 }
