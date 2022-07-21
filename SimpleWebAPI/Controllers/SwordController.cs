@@ -126,11 +126,19 @@ namespace SimpleWebAPI.Controllers
 
         }
 
-        [HttpGet("SamuraiWithType(Pagging)")]
-        public async Task<IEnumerable<SwordWithTypeDTO>> GetSamuraiWithType()
+        [HttpGet("SwordWithType(Pagging)")]
+        public async Task<IEnumerable<SwordWithTypeDTO>> GetSwordiWithType()
         {
             var results = await _swordDAL.GetSwordWithType();
             var dataRead = _mapper.Map<IEnumerable<SwordWithTypeDTO>>(results);
+            return dataRead;
+        }
+
+        [HttpGet("SwordWithElement")]
+        public async Task<IEnumerable<SwordWithElementDTO>> GetSwordWithElement()
+        {
+            var results = await _swordDAL.SwordWithElement();
+            var dataRead = _mapper.Map<IEnumerable<SwordWithElementDTO>>(results);
             return dataRead;
         }
 

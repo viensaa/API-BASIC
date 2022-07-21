@@ -160,5 +160,11 @@ namespace SampleWebAPI.Data.DAL
             Sword.Element.Remove(DeleteElement);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Sword>> SwordWithElement()
+        {
+            var results = await _context.Sword.Include(e => e.Element).ToListAsync();
+            return results;
+        }
     }
 }

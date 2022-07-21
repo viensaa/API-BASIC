@@ -19,6 +19,7 @@ namespace SampleWebAPI.Services
     {
         private List<User> _users = new List<User>
         {
+            
             new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
         };
 
