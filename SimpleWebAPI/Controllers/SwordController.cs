@@ -160,8 +160,7 @@ namespace SimpleWebAPI.Controllers
         {
             var insertData = _mapper.Map<Sword>(swordtoelement);
             var result = await _swordDAL.AddExistingSwordToElement(insertData);
-            var Read = _mapper.Map<SwordSamuraiElementDTO>(result);
-            return CreatedAtAction("Get", new { id = result.Id }, Read);
+            return Ok("Berhasil Menambahkan ");
         }
 
 
