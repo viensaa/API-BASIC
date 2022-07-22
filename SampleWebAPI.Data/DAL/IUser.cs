@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace SampleWebAPI.Data.DAL
 {
-    public interface IElement :ICrud<Element>
+    public interface IUser : ICrud<User>
     {
-        Task<IEnumerable<Element>> GetByName(string name);
-        Task addElementToSword(int idElement, int idSword);
+        Task<IEnumerable<User>> GetByName(string name);
     }
 }

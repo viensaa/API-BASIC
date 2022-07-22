@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using Type = SampleWebAPI.Domain.Type;
 
 namespace SampleWebAPI.Data
 {
@@ -25,11 +24,13 @@ namespace SampleWebAPI.Data
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Battle> Battles { get; set; }
         public DbSet<Sword> Sword { get; set; }
-        public DbSet<Element> element { get; set; }
+        public DbSet<Element> Element { get; set; }
+        public DbSet<Type> Type { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<SamuraiBattleStats> SamuraiBattleStats { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SampleDb");
+           // optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SampleDb");
             //.LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name },Microsoft.Extensions.Logging.LogLevel.Information).EnableSensitiveDataLogging();
 
         }

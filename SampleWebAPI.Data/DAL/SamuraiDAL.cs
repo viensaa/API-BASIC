@@ -76,6 +76,23 @@ namespace SampleWebAPI.Data.DAL
             }
         }
 
+        public async Task<Samurai> AddSamuraiWithSword(Samurai obj)
+        {
+            try
+            {
+                _context.Samurais.Add(obj);
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            //throw new NotImplementedException();
+        }
+
+
         //untuk update data
         public async Task<Samurai> Update(Samurai obj)
         {
@@ -101,5 +118,33 @@ namespace SampleWebAPI.Data.DAL
             var results = await _context.Samurais.Include(q => q.Quotes).ToListAsync();
             return results;
         }
+
+        public Task<Samurai> AddSwordWithType(Samurai obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Samurai> AddExistingSwordToElement(Samurai obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Samurai> AddExistingElementToSword(Samurai obj)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
+        //samuraiwithsword
+        //public async Task<IEnumerable<Samurai>> SamuraiWithSword()
+        //{
+        //    var results = await _context.Samurais.Include(sw => sw.Sword).ToListAsync();
+        //    return results;
+        //}
+
+
     }
 }

@@ -16,6 +16,25 @@ namespace SampleWebAPI.Data.DAL
             _context = context;
         }
 
+        public Task<Quote> AddExistingElementToSword(Quote obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Quote> AddExistingSwordToElement(Quote obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Quote> AddSamuraiWithSword(Quote obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Quote> AddSwordWithType(Quote obj)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task DeleteById(int id)
         {
@@ -26,6 +45,7 @@ namespace SampleWebAPI.Data.DAL
         {
             var results = await _context.Quotes.OrderBy(q => q.text).ToListAsync();
             return results;
+            
         }
 
         public Task<Quote> GetById(int id)

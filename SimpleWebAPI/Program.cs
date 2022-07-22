@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SampleWebAPI.Data;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
+using SampleWebAPI.Helpers;
 using SampleWebAPI.Services;
 using SimpleWebAPI.DTO;
 using SimpleWebAPI.Helpers;
@@ -29,6 +30,8 @@ builder.Services.AddScoped<ISamurai, SamuraiDAL>();
 builder.Services.AddScoped<IQuote, QuoteDAL>();
 builder.Services.AddScoped<ISword, SwordDAL>();
 builder.Services.AddScoped<IElement, ElementDAL>();
+builder.Services.AddScoped<Itype, TypeDAL>();
+builder.Services.AddScoped<IUser, UserDAL>();
 
 
 // configure strongly typed settings object
@@ -52,6 +55,7 @@ app.UseCors(x => x
         .AllowAnyHeader());
 //app.UseHttpsRedirection();
 //app.UseAuthorization();
+app.UseMiddleware<JwtMiddleware>();
 
 app.MapControllers();
 

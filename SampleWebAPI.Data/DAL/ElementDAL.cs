@@ -16,36 +16,110 @@ namespace SampleWebAPI.Data.DAL
         {
             _context = context;
         }
-        public Task DeleteById(int id)
+
+        public Task<Element> AddExistingElementToSword(Element obj)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<Element> AddExistingSwordToElement(Element obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Element> AddSamuraiWithSword(Element obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Element> AddSwordWithType(Element obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task DeleteById(int id)
+        {
+            try
+            {
+                var DeleteElement = await _context.Element.FirstOrDefaultAsync(e => e.Id == id);
+                if (DeleteElement == null)
+                    throw new Exception($"Data dengan id == {id} tidak di temukan");
+
+                _context.Element.Remove(DeleteElement);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Element>> GetAll()
         {
-            var results = await _context.element.OrderBy(e => e.ElementName).ToListAsync();
+            var results = await _context.Element.OrderBy(e => e.ElementName).ToListAsync();
             return results;
             
         }
 
-        public Task<Element> GetById(int id)
+        public async Task<Element> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Element.FirstOrDefaultAsync(e => e.Id == id);
+            if (result == null) throw new Exception($"Data Tidak Di Temukan");
+
+            return result;
         }
 
-        public Task<IEnumerable<Element>> GetByName(string name)
+        public async Task<IEnumerable<Element>> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var results = await _context.Element.Where(s => s.ElementName.Contains(name)).ToListAsync();
+            if (results == null) throw new Exception($"Data Tidak Di Temukan");
+
+            return results;
         }
 
-        public Task<Element> Insert(Element obj)
+        public async Task<Element> Insert(Element obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Element.Add(obj);
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception($"{ex.Message}");
+            }
         }
 
-        public Task<Element> Update(Element obj)
+        public async Task<Element> Update(Element obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var UpdateData = await _context.Element.FirstOrDefaultAsync(e => e.Id == obj.Id);
+                if (UpdateData == null)
+                    throw new Exception($"Data Dengan id={obj.Id} tidak di temukan");
+
+                UpdateData.ElementName = obj.ElementName;
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task addElementToSword(int idElement, int idSword)
+        {
+            var Element = _context.Element.FirstOrDefault(e => e.Id == idElement);
+            var sword = _context.Sword.FirstOrDefault(s => s.Id == idSword);
+
+            sword.Element.Add(Element);
+            await _context.SaveChangesAsync();
         }
     }
 }

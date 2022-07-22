@@ -12,5 +12,9 @@ namespace SampleWebAPI.Data.DAL
         Task<IEnumerable<Samurai>> GetByName(String name);
 
         Task<IEnumerable<Samurai>> SamuraiWIthQuote();
+        //Task<IEnumerable<Samurai>> SamuraiWithSword();
+        
+
+
     }
 }

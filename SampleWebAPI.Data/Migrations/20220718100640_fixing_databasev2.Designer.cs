@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SampleWebAPI.Data;
 
@@ -11,9 +12,10 @@ using SampleWebAPI.Data;
 namespace SampleWebAPI.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20220718100640_fixing_databasev2")]
+    partial class fixing_databasev2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,12 +29,12 @@ namespace SampleWebAPI.Data.Migrations
                     b.Property<int>("ElementId")
                         .HasColumnType("int");
 
-                    b.Property<int>("swordId")
+                    b.Property<int>("swordsId")
                         .HasColumnType("int");
 
-                    b.HasKey("ElementId", "swordId");
+                    b.HasKey("ElementId", "swordsId");
 
-                    b.HasIndex("swordId");
+                    b.HasIndex("swordsId");
 
                     b.ToTable("ElementSword");
                 });
@@ -88,7 +90,7 @@ namespace SampleWebAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Element");
+                    b.ToTable("element");
                 });
 
             modelBuilder.Entity("SampleWebAPI.Domain.Horse", b =>
@@ -177,7 +179,7 @@ namespace SampleWebAPI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ElementId")
+                    b.Property<int>("ElementiId")
                         .HasColumnType("int");
 
                     b.Property<int>("SamuraiId")
@@ -220,35 +222,6 @@ namespace SampleWebAPI.Data.Migrations
                     b.ToTable("Type");
                 });
 
-            modelBuilder.Entity("SampleWebAPI.Domain.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("ElementSword", b =>
                 {
                     b.HasOne("SampleWebAPI.Domain.Element", null)
@@ -259,7 +232,7 @@ namespace SampleWebAPI.Data.Migrations
 
                     b.HasOne("SampleWebAPI.Domain.Sword", null)
                         .WithMany()
-                        .HasForeignKey("swordId")
+                        .HasForeignKey("swordsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -57,17 +57,10 @@ namespace SimpleWebAPI.Controllers
         {
             try
             {
-                 var NewSword = _mapper.Map<Sword>(swordCreateDTO);
-                //var NewSword = new Sword
-                //{
-                //    SwordName = swordCreateDTO.SwordName,
-                //    Weight = swordCreateDTO.Weight
-
-                //};
-                var result = await _swordDAL.Insert(NewSword);
-                var DataRead = _mapper.Map<SwordDTO>(result);
-
-                return CreatedAtAction("Get", new { id = result.Id }, DataRead);
+                var newSword = _mapper.Map<Sword>(swordCreateDTO);
+                var result = await _swordDAL.Insert(newSword);
+                var Read = _mapper.Map<SwordDTO>(result);
+                return CreatedAtAction("Get", new { id = result.Id }, Read);
             }
             catch (Exception ex)
             {
@@ -83,6 +76,21 @@ namespace SimpleWebAPI.Controllers
             {
                 await _swordDAL.DeleteById(id);
                 return Ok("data berhasil di hapus");
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpDelete("DeleteElementOnSword/{id}")]
+        public async Task<ActionResult>DeleteElement(int id)
+        {
+            try
+            {
+                await _swordDAL.DeleteElementOnSword(id);
+                return Ok("Data Berhasil di Hapus");
             }
             catch (Exception ex)
             {
@@ -108,8 +116,54 @@ namespace SimpleWebAPI.Controllers
             }
         }
 
-        
-        
+        //mengambil data samurai dan sword
+        [HttpGet("samruaisowrdwithelement")]
+        public async Task<IEnumerable<SwordSamuraiElementDTO>> GetSamuraiSwordWithElement()
+        {
+            var results = await _swordDAL.SamuraiSwordWithElement();
+            var DataRead = _mapper.Map<IEnumerable<SwordSamuraiElementDTO>>(results);
+            return DataRead;
+
+        }
+
+        [HttpGet("SwordWithType(Pagging)")]
+        public async Task<IEnumerable<SwordWithTypeDTO>> GetSwordiWithType()
+        {
+            var results = await _swordDAL.GetSwordWithType();
+            var dataRead = _mapper.Map<IEnumerable<SwordWithTypeDTO>>(results);
+            return dataRead;
+        }
+
+        [HttpGet("SwordWithElement")]
+        public async Task<IEnumerable<SwordWithElementDTO>> GetSwordWithElement()
+        {
+            var results = await _swordDAL.SwordWithElement();
+            var dataRead = _mapper.Map<IEnumerable<SwordWithElementDTO>>(results);
+            return dataRead;
+        }
+
+
+        //menambahakn Sword beserta dengan Type (ajib bener)
+        [HttpPost("addSwordWithType")]
+        public async Task<ActionResult> Post(SwordWithTypeDTO swordWithTypeDTO)
+        {
+            var newData = _mapper.Map<Sword>(swordWithTypeDTO);
+            var result = await _swordDAL.Insert(newData);
+            var Read = _mapper.Map<SwordSamuraiElementDTO>(result);
+            return CreatedAtAction("Get", new { id = result.Id }, Read);
+        }
+
+
+
+        [HttpPost("addSwordToExistingElement")]
+        public async Task<ActionResult>Post(AddSwordToExistingElementDTO swordtoelement)
+        {
+            var insertData = _mapper.Map<Sword>(swordtoelement);
+            var result = await _swordDAL.AddExistingSwordToElement(insertData);
+            return Ok("Berhasil Menambahkan ");
+        }
+
+
 
     }
 }

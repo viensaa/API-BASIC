@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace SampleWebAPI.Domain
 {
-    public class Type
+    public class User
     {
         public int Id { get; set; }
-        public string TypeSword { get; set; }
-        public int SwordId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username{ get; set; }
+        public string Password { get; set; }
     }
 }
