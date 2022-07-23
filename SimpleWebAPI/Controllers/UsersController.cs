@@ -27,7 +27,7 @@ namespace SampleWebAPI.Controllers
         [HttpPost("Login")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {
-            var response = _userService.Authenticate(model);
+            var response = _userService.Login(model);
 
             if (response == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
