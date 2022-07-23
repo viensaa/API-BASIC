@@ -11,7 +11,7 @@
         public string Token { get; set; }
 
 
-        public AuthenticateResponse(User user, string token)
+        public AuthenticateResponse(Domain.User user, string token)
         {
             Id = user.Id;
             FirstName = user.FirstName;
@@ -20,10 +20,10 @@
             Token = token;
         }
 
-        public AuthenticateResponse(Domain.User user, string token)
-        {
-            this.user = user;
-            Token = token;
-        }
+        //public AuthenticateResponse(Domain.User user, string token)
+        //{
+        //    this.user = user;
+        //    Token = token;
+        //}
     }
 }
