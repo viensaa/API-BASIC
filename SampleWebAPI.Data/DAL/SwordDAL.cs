@@ -143,10 +143,13 @@ namespace SampleWebAPI.Data.DAL
         }
 
         //pagging
-        public async Task<IEnumerable<Sword>> GetSwordWithType()
+        public async Task<IEnumerable<Sword>> GetSwordWithType(int page)
         {
+            var pageResults = 10f;
+            var pageCount = Math.Ceiling(_context.Sword.Count() / pageResults);
+
             var results = await _context.Sword.Include(t => t.Type).ToListAsync();
-            var pagging = results.Skip(0).Take(10);
+            var pagging = results.Skip((page - 1) * (int)pageResults).Take((int)pageResults);
             return pagging;
             //throw new NotImplementedException();
         }

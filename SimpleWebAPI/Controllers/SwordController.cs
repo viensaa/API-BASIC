@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
 using SampleWebAPI.Domain;
+using SampleWebAPI.Helpers;
 using SimpleWebAPI.DTO;
 
 namespace SimpleWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SwordController : ControllerBase
@@ -127,9 +129,9 @@ namespace SimpleWebAPI.Controllers
         }
 
         [HttpGet("SwordWithType(Pagging)")]
-        public async Task<IEnumerable<SwordWithTypeDTO>> GetSwordiWithType()
+        public async Task<IEnumerable<SwordWithTypeDTO>> GetSwordiWithType(int page)
         {
-            var results = await _swordDAL.GetSwordWithType();
+            var results = await _swordDAL.GetSwordWithType(page);
             var dataRead = _mapper.Map<IEnumerable<SwordWithTypeDTO>>(results);
             return dataRead;
         }

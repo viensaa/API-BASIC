@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleWebAPI.Data.DAL;
+using SampleWebAPI.Helpers;
 using SimpleWebAPI.DTO;
 using Type = SampleWebAPI.Domain.Type;
 
 namespace SimpleWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TypeController : ControllerBase

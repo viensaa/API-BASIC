@@ -8,7 +8,7 @@ using SimpleWebAPI.DTO;
 
 namespace SimpleWebAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ElementController : ControllerBase

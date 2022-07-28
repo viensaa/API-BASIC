@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using SampleWebAPI.Models;
+using User = SampleWebAPI.Domain.User;
 
 namespace SampleWebAPI.Helpers
 {

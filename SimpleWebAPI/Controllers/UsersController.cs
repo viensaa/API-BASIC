@@ -34,6 +34,7 @@ namespace SampleWebAPI.Controllers
 
             return Ok(response);
         }
+
         [HttpPost("Register")]
         public async Task<ActionResult> Post(RegisterDTO registerDTO)
         {

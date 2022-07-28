@@ -9,6 +9,7 @@ using SimpleWebAPI.DTO;
 
 namespace SampleWebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class QuotesController : ControllerBase
@@ -19,7 +20,7 @@ namespace SampleWebAPI.Controllers
             _quoteDal = quoteDal;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<IEnumerable<QuoteDTO>> Get()
         {
