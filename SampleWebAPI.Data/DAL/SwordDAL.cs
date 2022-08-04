@@ -136,6 +136,7 @@ namespace SampleWebAPI.Data.DAL
             throw new NotImplementedException();
         }
 
+        //
         public async Task<IEnumerable<Sword>> SamuraiSwordWithElement()
         {
             var results = await _context.Sword.Include(s => s.Samurai).Include(e => e.Element).Include(t => t.Type).ToListAsync();

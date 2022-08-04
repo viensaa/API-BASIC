@@ -10,7 +10,7 @@ using SimpleWebAPI.Models;
 namespace SimpleWebAPI.Controllers
 {
     //menambahkan autorize di tangkat method
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SamuraisController : ControllerBase
